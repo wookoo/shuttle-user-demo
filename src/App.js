@@ -45,10 +45,10 @@ function App() {
       >
         <button
           onClick={async () => {
-            setLat(36.761707697467465);
-            setLon(126.93377842852455);
             var r = await axios.get("http://localhost:8000/bus/gps/download/");
-            console.log(r);
+            console.log(r.data);
+            setLat(r.data.lat);
+            setLon(r.data.lon);
           }}
         >
           버튼
