@@ -48,13 +48,30 @@ function App() {
       lat={lat}
       lon={lon}
       />
+
     </RenderAfterNavermapsLoaded>
-    <button
+  
+
+    <div style={{
+      backgroundColor:'#0f0',
+      overflow:'scroll',
+      width:'100%' ,
+      height:'15vh'}}>
+          <button
       onClick={() => {setLat(36.761707697467465); setLon(126.93377842852455);}}
       >버튼</button>
       <button
       onClick={() => {setLat(36.77068057043212); setLon(126.92485203719319);}}
       >버튼2</button>
+        <ul>
+          <li>1</li>
+          <li>1</li>
+          <li>1</li>
+          <li>1</li>
+          <li>1</li>
+          <li>1</li>
+        </ul>
+    </div>
     </div>
   )
 }
