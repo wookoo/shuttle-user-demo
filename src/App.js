@@ -5,6 +5,23 @@ import { NaverMap, Marker } from "react-naver-maps";
 import { RenderAfterNavermapsLoaded } from "react-naver-maps"; // 패키지 불러오기
 
 const axios = require("axios");
+var onchange = false;
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function get_server_data({ setLat, setLon }) {
+  while (1) {
+    var r = await axios.get("http://localhost:8000/bus/gps/download/");
+
+    console.log(r.data);
+    //console.log(setLon);
+    setLat(r.data.lat);
+    setLon(r.data.lon);
+    await sleep(1000);
+  }
+}
 function NaverMapAPI({ lat, lon }) {
   return (
     <NaverMap
@@ -22,9 +39,16 @@ function NaverMapAPI({ lat, lon }) {
     </NaverMap>
   );
 }
+
 function App() {
   const [lat, setLat] = useState(37.3595704);
   const [lon, setLon] = useState(127.105399);
+  //if (!onchange) {
+  //onchange = true;
+  //get_server_data({ setLat, setLon });
+  //}
+  //get_server_data({ setLat, setLon });
+
   return (
     <div>
       <RenderAfterNavermapsLoaded
@@ -44,11 +68,8 @@ function App() {
         }}
       >
         <button
-          onClick={async () => {
-            var r = await axios.get("http://localhost:8000/bus/gps/download/");
-            console.log(r.data);
-            setLat(r.data.lat);
-            setLon(r.data.lon);
+          onClick={() => {
+            get_server_data({ setLat, setLon });
           }}
         >
           버튼
@@ -73,5 +94,5 @@ function App() {
     </div>
   );
 }
-
+//get_server_data({ sr, sl });
 export default App;
