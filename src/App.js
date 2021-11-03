@@ -17,7 +17,7 @@ class App extends React.Component {
   getPosition = async () => {
     const {
       data: { lat, lon },
-    } = await axios.get("http://localhost:8000/bus/gps/download/");
+    } = await axios.get("http://192.168.1.71:8000/bus/gps/download/");
     this.setState({ lat: lat, lon: lon });
     console.log(lat, lon);
   };
